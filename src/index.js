@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import App from './components/App'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import App from './components/App';
 
 ReactDOM.render(
   <AppContainer>
@@ -17,8 +17,7 @@ if (module.hot) {
     ReactDOM.render(
       <AppContainer>
         <NextApp/>
-      </AppContainer>
-      ,
+      </AppContainer>,
       document.getElementById('root')
     );
   });
