@@ -39,6 +39,23 @@ export default class Contact extends React.Component {
 
     }
 
+    componentWillMount(){
+        const contactData  = localStorage.contactData;
+
+        if(contactData){
+            this.setState({
+                contactData : JSON.parse(contactData)
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(JSON.stringify(prevState.contactData) != JSON.stringify(this.state.contactData)){
+            localStorage.contactData = JSON.stringify(this.state.contactData);
+        }
+    }
+
+
     handleCreate(contact) {
         this.setState({
             contactData: update(this.state.contactData, {$push: [contact]})
@@ -67,8 +84,8 @@ export default class Contact extends React.Component {
     }
     handleRemove() {
 
-        if(this.state.keyIndex < 0){
-            return ;
+        if (this.state.keyIndex < 0) {
+            return;
         }
 
         this.setState({
@@ -116,14 +133,8 @@ export default class Contact extends React.Component {
                     {mapToComponents(this.state.contactData)
 }
                 </div>
-                <ContactDetails
-                    isSelected= {this.state.keyIndex != -1}
-                    contact={this.state.contactData[this.state.keyIndex]}
-                    handleRemove = {this.handleRemove}
-                    onEdit = {this.handleEdit}/>
-                <ContactCreate
-                    onCreate = {this.handleCreate}
-                />
+                <ContactDetails isSelected= {this.state.keyIndex != -1} contact={this.state.contactData[this.state.keyIndex]} handleRemove={this.handleRemove} onEdit={this.handleEdit}/>
+                <ContactCreate onCreate={this.handleCreate}/>
             </div >
         );
     }
